@@ -2,8 +2,6 @@
 
 " 颜色 {{{
 Plug 'morhetz/gruvbox'
-" Plug 'itchyny/lightline.vim'
-" Plug 'jszakmeister/vim-togglecursor'
 " }}}
 
 " 功能增强 {{{
@@ -17,21 +15,16 @@ Plug 'jlanzarotta/bufexplorer'                      " 便于在buffer之间切�
 Plug 'tpope/vim-unimpaired'                         " 对常用命令的映射。例如，paste的切换映射为了yo/yO。
 Plug 'vim-scripts/ShowTrailingWhitespace'           " 显示行尾的空白
 Plug 'vim-scripts/open-browser.vim'                 " 打开光标下的url链接
-" Plug 'yonchu/accelerated-smooth-scroll'             " 平滑滚动
 Plug 'rhysd/open-pdf.vim'			    " 打开pdf
 Plug 'svermeulen/vim-easyclip'			    " 剪贴板增强功能
 Plug 'vim-scripts/fcitx.vim'			    " 中文输vim-scripts/fcitx.vim
 Plug 'tpope/vim-capslock'			    " 大写键
 Plug 'tpope/vim-fugitive'                           " git管理
-" Plug 'spolu/dwm.vim'				    " 窗口动态管理
 Plug 'moll/vim-bbye'				    " 关闭buffer，但是不退出程序
-Plug 'xolox/vim-notes'				    " 笔记软件
-Plug 'xolox/vim-misc'
 " }}}
 
 " 搜索 {{{
 
-Plug 'haya14busa/incsearch.vim'			    " 增强vim查找功能
 Plug 'rking/ag.vim'
 Plug 'wincent/command-t', {
     \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
@@ -53,11 +46,11 @@ Plug 'vim-scripts/ctags.vim'                        " ctags插件
 
 " 自动补全,语法高亮,语言辅助 {{{
 
-" Plug 'Valloric/YouCompleteMe',{'do':'./install.py'} " 代码自动补充完成插件
+Plug 'Valloric/YouCompleteMe',{'do':'./install.py'} " 代码自动补充完成插件
 Plug 'octol/vim-cpp-enhanced-highlight'             " C++语法高亮增强插件
 Plug 'honza/vim-snippets'			    " 一些snippets的集合
 Plug 'derekwyatt/vim-fswitch'                       " 打开.cpp可打开对应的.h
-" Plug 'w0rp/ale'					    " 语法检查
+Plug 'w0rp/ale'					    " 语法检查
 Plug 'davidhalter/jedi-vim'                         " Python自动补全
 Plug 'vim-scripts/indentpython.vim'		    " 符合PEP8标准的缩进
 Plug 'skywind3000/asyncrun.vim'                     " 自动编译python
@@ -67,7 +60,6 @@ Plug 'mindriot101/vim-yapf'                         " 代码具有参考性，�
 
 " 文档编写 {{{
 
-Plug 'coot/atp_vim'                                 " automatic Latex
 " }}}
 
 " 小功能 {{{
