@@ -1,0 +1,82 @@
+" http://bytefluent.com/vivify/ 提供了vim在线颜色配置
+
+" 颜色 {{{
+Plug 'morhetz/gruvbox'
+" Plug 'itchyny/lightline.vim'
+" Plug 'jszakmeister/vim-togglecursor'
+" }}}
+
+" 功能增强 {{{
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/vim-easy-align'                      " 快速对齐
+Plug 'scrooloose/nerdtree'			    " 替代vim的文件浏览
+Plug 'jlanzarotta/bufexplorer'                      " 便于在buffer之间切换
+Plug 'tpope/vim-unimpaired'                         " 对常用命令的映射。例如，paste的切换映射为了yo/yO。
+Plug 'vim-scripts/ShowTrailingWhitespace'           " 显示行尾的空白
+Plug 'vim-scripts/open-browser.vim'                 " 打开光标下的url链接
+" Plug 'yonchu/accelerated-smooth-scroll'             " 平滑滚动
+Plug 'rhysd/open-pdf.vim'			    " 打开pdf
+Plug 'svermeulen/vim-easyclip'			    " 剪贴板增强功能
+Plug 'vim-scripts/fcitx.vim'			    " 中文输vim-scripts/fcitx.vim
+Plug 'tpope/vim-capslock'			    " 大写键
+Plug 'tpope/vim-fugitive'                           " git管理
+" Plug 'spolu/dwm.vim'				    " 窗口动态管理
+Plug 'moll/vim-bbye'				    " 关闭buffer，但是不退出程序
+Plug 'xolox/vim-notes'				    " 笔记软件
+Plug 'xolox/vim-misc'
+" }}}
+
+" 搜索 {{{
+
+Plug 'haya14busa/incsearch.vim'			    " 增强vim查找功能
+Plug 'rking/ag.vim'
+Plug 'wincent/command-t', {
+    \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+\ }
+" }}}
+
+" 编程基础 {{{
+
+Plug 'vimcn/vimcdoc'                                " 中文帮助文档
+Plug 'scrooloose/nerdcommenter'                     " 注释插件
+Plug 'SirVer/ultisnips'			            " 代码片段插入插件
+" }}}
+
+" tags {{{
+
+Plug 'majutsushi/tagbar'                            " 基于tag的标识符列表
+Plug 'vim-scripts/ctags.vim'                        " ctags插件
+" }}}
+
+" 自动补全,语法高亮,语言辅助 {{{
+
+" Plug 'Valloric/YouCompleteMe',{'do':'./install.py'} " 代码自动补充完成插件
+Plug 'octol/vim-cpp-enhanced-highlight'             " C++语法高亮增强插件
+Plug 'honza/vim-snippets'			    " 一些snippets的集合
+Plug 'derekwyatt/vim-fswitch'                       " 打开.cpp可打开对应的.h
+" Plug 'w0rp/ale'					    " 语法检查
+Plug 'davidhalter/jedi-vim'                         " Python自动补全
+Plug 'vim-scripts/indentpython.vim'		    " 符合PEP8标准的缩进
+Plug 'skywind3000/asyncrun.vim'                     " 自动编译python
+Plug 'vim-scripts/Pydiction'			    " 自动显示python关键词
+Plug 'mindriot101/vim-yapf'                         " 代码具有参考性，主要是command
+" }}}
+
+" 文档编写 {{{
+
+Plug 'coot/atp_vim'                                 " automatic Latex
+" }}}
+
+" 小功能 {{{
+
+Plug 'itchyny/calendar.vim'
+Plug 'lifepillar/vim-cheat40'                       " 只有在线帮助文档，打开方式<leader>?
+
+" }}}
+
+" Plug 'bling/vim-bufferline'			    " 在状态栏显示buffer
+" Plug 'ervandew/supertab'			    " 改变tab的自动完成方式
+
