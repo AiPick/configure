@@ -310,10 +310,10 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " 默认加载vim的快捷键
-nmap  <silent> <leader>vim :e ~/.vim/vimrc<cr>
+nmap  <silent> <leader>vim :e ~/.vim/vimrc<CR>
 
 " 默认打开cheat40.txt快捷键
-nmap  <silent> <leader>ch :e ~/.vim/cheat40.txt<cr>
+nmap  <silent> <leader>ch :e ~/.vim/cheat40.txt<CR>
 
 " 映射netrw的开关
 map <silent> <F2> :NERDTreeToggle<CR>
@@ -325,7 +325,7 @@ map <silent> <F2> :NERDTreeToggle<CR>
 " nmap LE $
 
 " 删除所有行末尾的空格
-nnoremap <silent> <leader><space> :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <silent> <leader><space> :%s/\s\+$//<CR>:let @/=''<CR>
 
 " 打开剪贴板历史记录
 nnoremap <silent> <leader>ya :Yanks<CR>
@@ -360,6 +360,10 @@ nnoremap <leader>nmr :set noreadonly<CR>:set modified<CR>
 
 " 打开UltiSnipEdit
 nnoremap <leader>sn :UltiSnipsEdit<CR>
+
+" 复制到剪贴板
+vnoremap <C-C> "+y
+nnoremap <C-C> "+y
 " }}}
 
 " 插件中的快捷键映射 {{{
@@ -427,8 +431,10 @@ autocmd vimrc FileType python setlocal
 autocmd vimrc FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
 
 " 保存视图
-autocmd vimrc BufWinLeave * if expand("%") != "" | mkview | endif
-autocmd vimrc BufWinEnter * if expand("%") != "" | loadview | endif" }}}
+" set viewoptions=cursor
+" autocmd vimrc BufWinLeave * if expand("%") != "" | mkview | endif
+" autocmd vimrc BufWinEnter * if expand("%") != "" | loadview | endif" }}}
+autocmd vimrc BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 " }}}2
 
 " userline {{{2
@@ -474,7 +480,7 @@ let g:gruvbox_improved_strings=1
 let g:gruvbox_improved_warnings=1
 
 " set background=dark
-set background=dark
+set background=light
 
 colorscheme gruvbox
 
@@ -485,46 +491,6 @@ if $COLORTERM == 'gnome-terminal'
 endif
 set t_ut=
 
-" }}}2
-
-" ATP_VIM latex {{{2
-
-let b:atp_TexCompiler="xelatex"
-let b:atp_BibCompiler="bibtex"
-let b:atp_TexOptions="-synctex=1"
-let b:atp_auruns=5
-let b:atp_running=1
-
-" 允许折叠
-" 重新折叠方法 :filetype detect
-"  g:atp_fold_environments = [] 一般不配置，折叠环境变量
-" 会导致vim的速度明显下降
-let g:atp_folding=0
-
-let b:atp_TexFlavor="tex"
-let g:askforoutdir=1
-let b:atp_OpentViewer=1
-
-" 按下<F6>键，删除所有中间文件
-let g:atp_delete_output=1
-
-" 显示Progress Bar
-let g:atp_ProgressBar=1
-
-" 显示错误信息
-let g:atp_signs=1
-
-" 在状态栏显示tex是否运行了
-let g:atp_statusNotify=1
-
-" 在omnifunc时使用tab补全
-let g:atp_tab_map=1
-
-" 添加amsmath自动补全功能
-let g:atp_amsmath=1
-
-" 只有处于math环境时候才自动补全
-let g:atp_check_if_math_mode = 1
 " }}}2
 
 " Nerd Comment  {{{2
@@ -891,23 +857,6 @@ let g:CommandTRecursiveMatch = 0
 
 " }}}2
 
-" h-insearch {{{2
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
-" 查找完毕后自动关闭结果高亮
-nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
-
-let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
-" }}}2
-
 " ale {{{2
 "
   let g:ale_sign_error = '>>'
@@ -934,16 +883,15 @@ let g:pydiction_menu_height = 30
 " asynrun {{{2
 "
     autocmd vimrc FileType python nnoremap <buffer> <F5> :update<Bar>execute 'AsyncRun! python '.shellescape(@%, 1)<CR>
-    autocmd vimrc FileType python nnoremap <buffer> <LocalLeader>cc :update<Bar>execute 'AsyncRun! python '.shellescape(@%, 1)<CR>
-    autocmd vimrc FileType python nnoremap <buffer> <LocalLeader>cs :update<Bar>execute 'AsyncStop!'<CR>
-    autocmd User AsyncRunStart call asyncrun#quickfix_toggle(10, 1)
+    autocmd vimrc FileType python nnoremap <buffer> <LocalLeader>ll :update<Bar>execute 'AsyncRun! python '.shellescape(@%, 1)<CR>
+    autocmd vimrc FileType python nnoremap <buffer> <LocalLeader>ls :update<Bar>execute 'AsyncStop!'<CR>
+    autocmd vimrc FileType  tex nnoremap <buffer> <F5>
+                \ :update<bar>execute
+                \ 'AsyncRun! make -C '.shellescape(expand("%:p:h"))
+                \.';make -C '.shellescape(expand("%:p:h")).' clean'<CR>
 
-    " 打开输出窗口
-    noremap <silent> <F9> :call asyncrun#quickfix_toggle(10,1)<cr>
-
-    " 关闭输出窗口
-    noremap <silent> <F10> :call asyncrun#quickfix_toggle(10,0)<cr>
-
+    autocmd User AsyncRunStart call asyncrun#quickfix_toggle(12, 1)
+    noremap <silent> <F10> :call Tools_ToggleAsyncrun()<CR>
 " }}}2
 
 " easy-clipboard {{{2
@@ -1089,6 +1037,19 @@ function! Tools_ReadRefMode()
     exec "edit ".bname
     noautocmd silent! 1wincmd w
     exec "normal! \<c-^>"
+endfunction
+
+function! Tools_ToggleAsyncrun()
+    if !exists('g:toggleasyn')
+        let g:toggleasyn=1
+    endif
+    if g:toggleasyn == 1
+        call asyncrun#quickfix_toggle(12,0)
+        let g:toggleasyn=0
+    else
+        call asyncrun#quickfix_toggle(12,1)
+        let g:toggleasyn=1
+    endif
 endfunction
 " }}}1
 
