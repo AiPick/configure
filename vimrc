@@ -129,7 +129,6 @@ set path+=~/Documents/hxzdiary,~/.vim/,**
 "
 set wildignore+=*/.git,*/.svn,*/.tmp
 set wildignore+=*.o,*.obj
-set wildignore+=*.aux,*._aux,*._log,*.log,*.out,*.synctex.gz,*.toc,*.tex.project.vim
 
 " 启动界面
 set shortmess=atI
@@ -250,13 +249,6 @@ let g:mapleader=';'
 nmap Q gqap
 vmap Q gq
 
-" 避免中文符号
-" inoremap 《 <
-" inoremap  》<
-" inoremap 【 [
-" inoremap  】]
-" inoremap  “ "
-
 " Move easily between ^ and $
 noremap <C-h> ^
 noremap <C-l> $
@@ -283,8 +275,6 @@ nnoremap <leader>w  :w<CR>
 
 " 退出整个vim
 nnoremap <leader>qa :qa<CR>
-" 左右两边的窗口相互调换
-nnoremap <leader>x :<c-u>wincmd x<CR>
 " 重新映射<c-^>
 nnoremap <leader>o <c-^>
 
@@ -352,8 +342,8 @@ nnoremap  <F12>        :<C-U>profile start profile.log<CR>:profile func *<CR>:pr
 nnoremap  <S-F12>        :<C-U>profile pause<CR>:noautocmd quitall!<CR>
 
 " 重新定义:bd
-nnoremap ZZ :Bdelete<CR>
-nnoremap ZQ :q<CR>
+nnoremap <leader>x :Bdelete<CR>
+nnoremap <leader>q :q<CR>
 
 " 修改帮助文件的默认选项,以方便保存
 nnoremap <leader>nmr :set noreadonly<CR>:set modified<CR>
@@ -752,7 +742,12 @@ let g:ycm_filetype_blacklist= {
     \'tex':1,
     \'txt':1
     \}
-" }}}2
+
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+"  }}}2
 
 "  Netrw {{{2
 
@@ -886,9 +881,13 @@ let g:pydiction_menu_height = 30
     autocmd vimrc FileType python nnoremap <buffer> <LocalLeader>ll :update<Bar>execute 'AsyncRun! python '.shellescape(@%, 1)<CR>
     autocmd vimrc FileType python nnoremap <buffer> <LocalLeader>ls :update<Bar>execute 'AsyncStop!'<CR>
     autocmd vimrc FileType  tex nnoremap <buffer> <F5>
-                \ :update<bar>execute
-                \ 'AsyncRun! make -C '.shellescape(expand("%:p:h"))
-                \.';make -C '.shellescape(expand("%:p:h")).' clean'<CR>
+            \ :update<bar>execute
+            \ 'AsyncRun! latexmk '.shellescape(expand("%:t"))<CR>
+            " \ 'AsyncRun! latexmk -c'<CR>
+
+    autocmd vimrc FileType  tex nnoremap <buffer> <F6>
+            \ :execute
+            \ 'AsyncRun! okular '.shellescape(expand("%:p:r")).'.pdf >/dev/null 2>&1 &'<CR>
 
     autocmd User AsyncRunStart call asyncrun#quickfix_toggle(12, 1)
     noremap <silent> <F10> :call Tools_ToggleAsyncrun()<CR>
@@ -967,10 +966,25 @@ nnoremap <silent> <leader>bu :ToggleBufExplorer<CR>
 nnoremap <Leader>q :Bdelete<CR>
 " }}}
 
-" notes {{{2
-let g:notes_directories = ['~/Documents/Notes']
-let g:notes_suffix = '.txt'
-
+" vimtex {{{2
+let g:vimtex_compiler_latexmk = {
+            \ 'backend' : 'process',
+            \ 'background' : 1,
+            \ 'build_dir' : '',
+            \ 'callback' : 1,
+            \ 'continuous' : 1,
+            \ 'executable' : 'latexmk',
+            \ 'options' : [
+            \   '-pdf',
+            \   '-verbose',
+            \   '-file-line-error',
+            \   '-synctex=1',
+            \   '-interaction=nonstopmode',
+            \ ],
+            \}
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_view_general_options_latexmk = '--unique'
 " }}}2
 " }}}1
 
