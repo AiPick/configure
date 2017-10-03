@@ -1,0 +1,42 @@
+let mapleader=';'
+set focuscontent
+set visualbell
+set showstatuslinks=0
+set maxitems=10
+set gui=none,tabs
+" set fullscreen
+set titlestring=
+set hintchars=asdfghjkl
+set status=input,history,location,tabcount,position
+highlight Hint::after content: attr(number); font-size:11pt
+highlight Normal color: black; background: white; font-size:14pt
+highlight Hint font-family: monospace; font-size: 15px; padding: 0 .2em; background-color: #f07e00; color: white;
+highlight HintElem background-color: #fdffc3; color: #222;
+highlight HintActive background-color: #ffdcdc;
+nnoremap j <C-d>
+nnoremap k <C-u>
+nnoremap J 10j
+nnoremap K 10k
+nnoremap H <C-p>
+nnoremap L <C-n>
+nnoremap x d
+nnoremap X u
+nnoremap U :undo<Space>
+nnoremap <BS> gu
+nnoremap <C-BS> gU
+nnoremap <C-f> <right>
+nnoremap <C-b> <left>
+nnoremap <silent> <leader>o  <C-^>
+nnoremap <silent> <leader>p  :winopen -private<CR>
+nnoremap <silent> <leader>a  :addons<CR>
+nnoremap <silent> <leader>h  :history<CR>
+nnoremap <silent> <leader>r  :restart<CR>
+nnoremap <leader>s  :execute "source " + io.getRCFile().path<CR>
+nnoremap w :open<Space>baidu<Space>
+nnoremap <leader>w :tabopen<Space>baidu<Space>
+set! browse.startup.homepage=http://www.baidu.com
+set! browse.display.background_color=#CCE8CF
+
+echo 'vimperatorrc sourced'
+
+" vim: ft=vimperator:
